@@ -28,6 +28,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		window.setFrameAutosaveName("Main Window")
 		window.contentView = NSHostingView(rootView: contentView)
 		window.makeKeyAndOrderFront(nil)
+		
+		// stuff
+		if let jsonURL = Bundle.main.url(forResource: "gear", withExtension: "json") {
+			let jsonData = try! Data(contentsOf: jsonURL)
+			let jsonDecoder = JSONDecoder()
+			let gear = try! jsonDecoder.decode([Gear].self, from: jsonData)
+			
+			print(gear)
+		}
+		
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
